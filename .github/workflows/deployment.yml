@@ -1,0 +1,45 @@
+# Define the workflow's name
+name: Maven Central Repo Deployment
+# Triggered after release in master branch or tag
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v*
+  pull_request:
+    branches:
+      - master
+jobs:
+  publish:
+    # Define ubuntu as the default OS
+    runs-on: ubuntu-latest
+    env:
+      JDK_VER: 1.8
+    steps:
+      # Checkout Git Repo
+      - name: Checkout Git Repo
+        # Checkout the source code
+        # see: https://github.com/marketplace/actions/checkout
+        uses: actions/checkout@v2
+      # Set up Maven Central Repo
+      - name: Set up OpenJDK ${{ env.JDK_VER }}
+        # Set up java environment
+        # see: https://github.com/marketplace/actions/setup-java-jdk
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ env.JDK_VER }}
+          server-id: sonatype-nexus-staging
+          server-username: ${{ secrets.OSSRH_USER }}
+          server-password: ${{ secrets.OSSRH_PASSWORD }}
+          gpg-passphrase: ${{ secrets.GPG_PASSWORD }}
+      # Publish to Maven Central Repo
+      - name: Publish to Maven Central Repo
+        # automatically publishing Maven packages
+        # see: https://github.com/marketplace/actions/action-maven-publish
+        uses: samuelmeuli/action-maven-publish@v1
+        with:
+          #gpg_private_key: ${{ secrets.GPG_SECRET }}
+          #gpg_passphrase: ${{ secrets.GPG_PASSWORD }}
+          nexus_username: ${{ secrets.OSSRH_USER }}
+          nexus_password: ${{ secrets.OSSRH_PASSWORD }}
