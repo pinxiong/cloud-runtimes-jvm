@@ -1,5 +1,5 @@
 # Define the workflow's name
-name: Build and Test for cloud-runtimes-jvm
+name: Build and Test
 # Triggered after push, pull_request and workflow_dispatch events
 on: [push, pull_request, workflow_dispatch]
 
@@ -10,6 +10,7 @@ env:
 
 jobs:
   build-source:
+    name: "Build the source code"
     runs-on: ubuntu-latest
     env:
       JDK_VER: 8
@@ -72,6 +73,8 @@ jobs:
     steps:
       - name: "Checkout the source code"
         uses: actions/checkout@v2
+        with:
+          path: cloud-runtimes-jvm
       - name: "Set up OpenJDK ${{ matrix.jdk }}"
         uses: actions/setup-java@v1
         with:
