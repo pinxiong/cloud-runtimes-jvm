@@ -1,5 +1,5 @@
 # Define the workflow's name
-name: Build and Test
+name: "Build and Test"
 # Triggered after push, pull_request and workflow_dispatch events
 on: [push, pull_request, workflow_dispatch]
 

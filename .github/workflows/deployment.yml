@@ -1,5 +1,5 @@
 # Define the workflow's name
-name: Maven Central Repo Deployment
+name: "Maven Central Repo Deployment"
 # Triggered after release in master branch or tag
 on:
   push:
@@ -18,12 +18,12 @@ jobs:
       JDK_VER: 8
     steps:
       # Checkout Git Repo
-      - name: Checkout Git Repo
+      - name: "Checkout the source code"
         # Checkout the source code
         # see: https://github.com/marketplace/actions/checkout
         uses: actions/checkout@v2
       # Set up Maven Central Repo
-      - name: Set up OpenJDK ${{ env.JDK_VER }}
+      - name: "Set up OpenJDK ${{ env.JDK_VER }}"
         # Set up java environment
         # see: https://github.com/marketplace/actions/setup-java-jdk
         uses: actions/setup-java@v1
@@ -45,7 +45,7 @@ jobs:
           echo "nexus_username: ${{ secrets.OSSRH_USER }}"
           echo "nexus_password: ${{ secrets.OSSRH_PASSWORD }}"
       # Publish to Maven Central Repo
-      - name: Publish to Maven Central Repo
+      - name: "Publish to Maven Central Repo"
         # automatically publishing Maven packages
         # see: https://github.com/marketplace/actions/action-maven-publish
         uses: samuelmeuli/action-maven-publish@v1
