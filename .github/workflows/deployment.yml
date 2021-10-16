@@ -15,7 +15,7 @@ jobs:
     # Define ubuntu as the default OS
     runs-on: ubuntu-latest
     env:
-      JDK_VER: 1.8
+      JDK_VER: 8
     steps:
       # Checkout Git Repo
       - name: Checkout Git Repo

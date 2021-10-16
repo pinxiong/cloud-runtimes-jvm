@@ -10,9 +10,10 @@ env:
 
 jobs:
   build-source:
-    name: "Build the source code"
+    name: "Build Source Code"
     runs-on: ubuntu-latest
     env:
+      # The default JDK version
       JDK_VER: 8
     outputs:
       version: ${{ steps.cloud-runtimes-version.outputs.version }}
